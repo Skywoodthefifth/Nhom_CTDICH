@@ -398,7 +398,7 @@ void lexical_analysis()
         // printf("\ntoken sau copy: %s \n", tk);
 
         // printf("\nstrlen(x) = %d\n", strlen(x));
-    } while ((i < strlen(x)) || (*tk != '\0'));
+    } while ((i < strlen(x)) && (*tk != '\0')); // Modify || to &&
     //
 }
 int main()
@@ -421,7 +421,7 @@ int main()
 
     // in danh sach tu to va thuoc tinh
 
-    for (int i = 0; i < tka_len - 1; i++) // ta co doi thanh tka_len - 1 nha
+    for (int i = 0; i < tka_len; i++)
     {
         printf("token : %s , attribute : %s \n", tka[i].tk, tka[i].a);
     }
