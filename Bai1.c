@@ -15,7 +15,7 @@ struct token_attri
 
 } tka[100];
 
- int tka_len = 0;
+int tka_len = 0;
 
 unsigned char readchar(unsigned char *x, unsigned int i) // unsigned char : các số nguyên dương từ 0 đến 255
 {
@@ -106,7 +106,7 @@ attri attribute(state s)
     case 30:
         strcpy(ch, "chia lay du");
         break;
-   
+
     case 48:
         strcpy(ch, "so nguyen he 8");
         break;
@@ -115,11 +115,11 @@ attri attribute(state s)
         break;
     case 52:
         strcpy(ch, "so 0");
-        break;  
+        break;
     case 54:
         strcpy(ch, "so nguyen he 10");
         break;
-    
+
     case 57:
         strcpy(ch, "so thuc");
         break;
@@ -127,8 +127,6 @@ attri attribute(state s)
     default:
         strcpy(ch, "token ko duoc doan nhan(tt ko dung \0");
     }
-
-    
 
     return ch;
 }
@@ -151,13 +149,13 @@ int nostar_end_state(state s)
     case 25:
     case 28:
     case 30:
-    //
- 
-    // case 48:
-    // case 51:
-    // case 52:
-    // case 54:
-    // case 57:
+        //
+
+        // case 48:
+        // case 51:
+        // case 52:
+        // case 54:
+        // case 57:
         return 1;
     default:
         return 0;
@@ -191,7 +189,7 @@ int star_end_state(state s)
     }
 }
 state start_state_otherbrand(state s) // trả về trạng thái bắt đầu ( kiểm tra xem s là trạng thái bắt đầu nào và trả vể kiểu đó)
-{                                    // trả về trạng thái bắt đầu hoặc trạng thái lỗi
+{                                     // trả về trạng thái bắt đầu hoặc trạng thái lỗi
     state start;
     // bởi vì ban đầu là star = 0 rồi nên giờ star = 15, nếu khác 15 sẽ lỗi
     switch (s)
@@ -202,7 +200,7 @@ state start_state_otherbrand(state s) // trả về trạng thái bắt đầu (
     case 15:
         start = 45; // 15 ->45
         break;
-    
+
     case 45:
         start = ERROR_STATE; // 45 ko có đường chuyển nên lỗi
         break;
@@ -211,7 +209,7 @@ state start_state_otherbrand(state s) // trả về trạng thái bắt đầu (
 }
 int start_state(state s) // kiểm tra coi phải trạng thái bắt đầu không , tức TH 0 vs 15
 {
-    if ((s == 0) || (s == 15)||(s == 45))
+    if ((s == 0) || (s == 15) || (s == 45))
         return 1;
     return 0;
 }
@@ -243,8 +241,15 @@ token search_token(unsigned int *i, attri tt)
     unsigned char c;
     do // đọc kí tự tương ứng với vị trí thứ i
     {
-        c = readchar(x, *i);                  // trả về kí tự thứ i
-        *i = *i + 1;                          // tăng con trỏ lên 1, để lần đọc tiếp theo sẽ đọc kí tự tiếp theo
+        c = readchar(x, *i); // trả về kí tự thứ i
+        *i = *i + 1;
+
+        if (c == '\n')
+        {
+            c = ' ';
+        }
+
+        // tăng con trỏ lên 1, để lần đọc tiếp theo sẽ đọc kí tự tiếp theo
     } while ((c == ' ') && (*i < strlen(x))); // nếu kí tự đọc được là kí tự rỗng và i chưa phải kí tự cuối thì đọc lại, tức bỏ qua kí tự trắng đó
                                               // khi đọc được c là kí tự khác kí tự trắng ( khi chưa đọc hết chuỗi)
                                               // chạy while để kiểm tra xem c là kí tự gì , rơi vào trường hợp nào
@@ -345,86 +350,105 @@ token search_token(unsigned int *i, attri tt)
                 s = 29;
             break;
 
-
         case 45:
-            if(c=='0'){
+            if (c == '0')
+            {
                 s = 46;
             }
-            else if(c>='1'&&c<='9'){
+            else if (c >= '1' && c <= '9')
+            {
                 s = 53;
             }
-            else if('.'){
+            else if ('.')
+            {
                 s = 55;
             }
             else
-                s = start_state_otherbrand(s); 
+                s = start_state_otherbrand(s);
             break;
-        case 46: //1
-            if(c>='0'&&c<='7'){
-                s = 47; //so 2
+        case 46: // 1
+            if (c >= '0' && c <= '7')
+            {
+                s = 47; // so 2
             }
-            else if(c =='X'||c =='x'){
-                s = 49; //4
+            else if (c == 'X' || c == 'x')
+            {
+                s = 49; // 4
             }
-            else if(c=='.'){
-                s=55;
+            else if (c == '.')
+            {
+                s = 55;
             }
-            else {
-                s = 52; //7
+            else
+            {
+                s = 52; // 7
             }
             break;
-        case 47: //2
-            if(c>='0' && c<='7'){
-                s=47; //2
+        case 47: // 2
+            if (c >= '0' && c <= '7')
+            {
+                s = 47; // 2
             }
             // else if((c>='a'&&c<='z') || (c>='A'&&c<='Z')) {
             //     s = 55;//12
             // }
-            else if(c=='.') { 
-                s = 55;//10 
+            else if (c == '.')
+            {
+                s = 55; // 10
             }
-            else if(c>='1'&&c<='9') { // kiem tra lai
+            else if (c >= '1' && c <= '9')
+            { // kiem tra lai
                 s = 53;
             }
-            else {
-                s= 48;//3
+            else
+            {
+                s = 48; // 3
             }
             break;
-        case 49: //4
-            if((c>='a'&&c<='f') || (c>='A'&&c<='F')||(c>='0' && c<='9')){
-                s= 50; //5
+        case 49: // 4
+            if ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'))
+            {
+                s = 50; // 5
             }
             break;
-        case 50: //5
-            if((c>='a'&&c<='f') || (c>='A'&&c<='F')||(c>='0' && c<='9')){
-                s= 50; //5
+        case 50: // 5
+            if ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'))
+            {
+                s = 50; // 5
             }
-            else {
-                s= 51; //6
-            }
-            break;
-        case 53: 
-            if(c>='0' && c<='9'){
-                s= 53; //10
-            }
-            else if(c=='.'){
-                s=55;
-            }
-            else {
-                s = 54;//11
+            else
+            {
+                s = 51; // 6
             }
             break;
-        case 55: //12
-            if(c>='0' && c<='9') {
-                s= 56; //12
+        case 53:
+            if (c >= '0' && c <= '9')
+            {
+                s = 53; // 10
+            }
+            else if (c == '.')
+            {
+                s = 55;
+            }
+            else
+            {
+                s = 54; // 11
+            }
+            break;
+        case 55: // 12
+            if (c >= '0' && c <= '9')
+            {
+                s = 56; // 12
             }
             break;
         case 56:
-            if(c>='0' && c<='9') {
-                s= 56; //12
+            if (c >= '0' && c <= '9')
+            {
+                s = 56; // 12
             }
-            else {
-                s=57;
+            else
+            {
+                s = 57;
             }
             break;
         default:
@@ -446,31 +470,30 @@ token search_token(unsigned int *i, attri tt)
         {                             // còn nếu > mà rơi vô TH * thì không ghép
                                       // vì TH * là phép so sánh nên kh ghép
             catchar_in_token(c, tk);  // ghép thêm kí tự c vào từ tố
-            *i = *i + 1; // Khi ghép vào từ tố rồi thì kí tự tiếp theo không cần đọc nữa, nên tăng con trỏ lên 1, để bỏ qua kí tự tiếp theo
+            *i = *i + 1;              // Khi ghép vào từ tố rồi thì kí tự tiếp theo không cần đọc nữa, nên tăng con trỏ lên 1, để bỏ qua kí tự tiếp theo
             stop = 1;
             strcpy(tt, attribute(s));
-            printf("tt in search 1: %s\n",tt);
+            // printf("tt in search 1: %s\n", tt);
         }
         else if (star_end_state(s)) // nếu nó là trạng thái kết thúc sao thì không ghép nữa, ví dụ dấu > mà kí tự tiếp theo là 1 số thì không ghép
         {
             strcpy(tt, attribute(s));
-            printf("tt in search 2: %s\n",tt);
+            // printf("tt in search 2: %s\n", tt);
             stop = 1;
         }
         else // nếu mà gặp các kí tự không thuộc các phép thì cho vô TH ni, ví dụ gặp số hay chữ chi đó thì sẽ cho thành 1 từ tố
         {    // lúc này tăng con trỏ lên  1 để đọc kí tự tiếp theo luôn
             catchar_in_token(c, tk);
-            
+
             *i = *i + 1;
             c = readchar(x, *i);
-          
         }
     }
-    
+
     return tk;
 }
 void save_token_and_attribute(token tk, attri a)
-{ 
+{
     // tka_len ++;
     // printf("tka_len in saves: %d\n", tka_len);
     strcpy(tka[tka_len].tk, tk);
@@ -499,13 +522,62 @@ void lexical_analysis()
 int main()
 {
     // nhap xau vao x
-    x = "<0x7 16 15 += ++ /= 0 .8  >> <";
+    FILE *ptr;
+    char ch;
+
+    int n = 0;
+
+    unsigned char temp[65536] = "";
+
+    x = temp;
+
+    // Opening file in reading mode
+    ptr = fopen("D:/code/CTDICH/Nhom_CTDICH/text.txt", "r");
+
+    if (NULL == ptr)
+    {
+        printf("file can't be opened \n");
+    }
+
+    // printf("content of this file are \n");
+
+    // Printing what is written in file
+    // character by character using loop.
+    do
+    {
+        ch = fgetc(ptr);
+        // printf("%c", ch);
+
+        x[n++] = ch;
+
+        // Checking if character is not EOF.
+        // If it is EOF stop eading.
+    } while (ch != EOF);
+
+    // Closing the file
+    fclose(ptr);
+
+    printf("x = \n %s \n \n\n", x);
+
+    // x = "< 0x7 16 15 += ++ /= 0 0.8  >> <";
     i = 0;
     lexical_analysis();
-    for (int i = 0; i < tka_len-1; i++)
+
+    FILE *fptr;
+    fptr = fopen("D:/code/CTDICH/Nhom_CTDICH/result.txt", "w");
+
+    if (fptr == NULL)
     {
-        printf("token : %s , attribute : %s \n", tka[i].tk, tka[i].a);
+        printf("Error!");
+        exit(1);
     }
+
+    for (int i = 0; i < tka_len - 2; i++)
+    {
+        fprintf(fptr, "token : %s , attribute : %s \n", tka[i].tk, tka[i].a);
+    }
+
+    fclose(fptr);
     // printf("tka_len: %d\n", tka_len);
     return 0;
 }
