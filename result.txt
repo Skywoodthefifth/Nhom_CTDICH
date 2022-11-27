@@ -7,7 +7,7 @@ token : | , attribute : OR BIT
 token : != , attribute : So sanh khac 
 token : ! , attribute : NOT 
 token : ^= , attribute : hoac loai tru BIT roi gan 
-token : ^ , attribute : XOR BOT 
+token : ^ , attribute : XOR BIT 
 token : ~ , attribute : Phu dinh tren BIT 
 token : << , attribute : dich trai 
 token : <= , attribute : nho hon bang 

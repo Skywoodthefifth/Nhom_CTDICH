@@ -71,7 +71,7 @@ attri attribute(state s)
         strcpy(ch, "hoac loai tru BIT roi gan");
         break;
     case 14:
-        strcpy(ch, "XOR BOT");
+        strcpy(ch, "XOR BIT");
         break;
     case 15:
         strcpy(ch, "Phu dinh tren BIT");
