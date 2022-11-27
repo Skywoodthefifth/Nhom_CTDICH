@@ -1,14 +1,14 @@
 token : && , attribute : AND 
-token : &= , attribute : AND = 
+token : &= , attribute : AND BIT roi gan 
 token : & , attribute : AND BIT 
 token : || , attribute : OR 
-token : |= , attribute : OR = 
+token : |= , attribute : OR BIT roi gan 
 token : | , attribute : OR BIT 
 token : != , attribute : So sanh khac 
 token : ! , attribute : NOT 
-token : ^= , attribute : ^= 
-token : ^ , attribute : ^ 
-token : ~ , attribute : ~ 
+token : ^= , attribute : hoac loai tru BIT roi gan 
+token : ^ , attribute : XOR BOT 
+token : ~ , attribute : Phu dinh tren BIT 
 token : << , attribute : dich trai 
 token : <= , attribute : nho hon bang 
 token : < , attribute : nho hon 

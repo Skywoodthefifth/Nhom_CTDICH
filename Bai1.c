@@ -47,7 +47,7 @@ attri attribute(state s)
         strcpy(ch, "AND");
         break;
     case 3:
-        strcpy(ch, "AND =");
+        strcpy(ch, "AND BIT roi gan");
         break;
     case 4:
         strcpy(ch, "AND BIT");
@@ -56,7 +56,7 @@ attri attribute(state s)
         strcpy(ch, "OR");
         break;
     case 7:
-        strcpy(ch, "OR =");
+        strcpy(ch, "OR BIT roi gan");
         break;
     case 8:
         strcpy(ch, "OR BIT");
@@ -68,13 +68,13 @@ attri attribute(state s)
         strcpy(ch, "NOT");
         break;
     case 13:
-        strcpy(ch, "^=");
+        strcpy(ch, "hoac loai tru BIT roi gan");
         break;
     case 14:
-        strcpy(ch, "^");
+        strcpy(ch, "XOR BOT");
         break;
     case 15:
-        strcpy(ch, "~");
+        strcpy(ch, "Phu dinh tren BIT");
         break;
     case 17:
         strcpy(ch, "dich trai");
