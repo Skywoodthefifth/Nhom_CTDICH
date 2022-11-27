@@ -532,7 +532,7 @@ int main()
     x = temp;
 
     // Opening file in reading mode
-    ptr = fopen("D:/code/CTDICH/Nhom_CTDICH/text.txt", "r");
+    ptr = fopen("text.txt", "r");
 
     if (NULL == ptr)
     {
@@ -560,16 +560,22 @@ int main()
     printf("x = \n %s \n \n\n", x);
 
     // x = "< 0x7 16 15 += ++ /= 0 0.8  >> <";
+
+    // Begin main algorithm
     i = 0;
     lexical_analysis();
 
+    //
+    //
+    // Print result to file
+    //
+
     FILE *fptr;
-    fptr = fopen("D:/code/CTDICH/Nhom_CTDICH/result.txt", "w");
+    fptr = fopen("result.txt", "w");
 
     if (fptr == NULL)
     {
-        printf("Error!");
-        exit(1);
+        printf("file can't be opened \n");
     }
 
     for (int i = 0; i < tka_len - 2; i++)
