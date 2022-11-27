@@ -44,83 +44,131 @@ attri attribute(state s)
     switch (s)
     {
     case 2:
-        strcpy(ch, "so sanh lon hon bang");
+        strcpy(ch, "AND");
         break;
     case 3:
-        strcpy(ch, "dich phai");
+        strcpy(ch, "AND BIT roi gan");
         break;
     case 4:
-        strcpy(ch, "so sanh lon hon");
+        strcpy(ch, "AND BIT");
         break;
     case 6:
-        strcpy(ch, "so sanh nho hon bang");
+        strcpy(ch, "OR");
         break;
     case 7:
-        strcpy(ch, "dich trai");
+        strcpy(ch, "OR BIT roi gan");
         break;
     case 8:
-        strcpy(ch, "so sanh nho hon");
+        strcpy(ch, "OR BIT");
         break;
     case 10:
-        strcpy(ch, "so sanh khong bang");
+        strcpy(ch, "So sanh khac");
         break;
     case 11:
-        strcpy(ch, "phu dinh");
+        strcpy(ch, "NOT");
         break;
     case 13:
-        strcpy(ch, "so sanh bang");
+        strcpy(ch, "hoac loai tru BIT roi gan");
         break;
     case 14:
-        strcpy(ch, "gan");
+        strcpy(ch, "XOR BIT");
+        break;
+    case 15:
+        strcpy(ch, "Phu dinh tren BIT");
         break;
     case 17:
-        strcpy(ch, "cong bang");
+        strcpy(ch, "dich trai");
         break;
     case 18:
-        strcpy(ch, "tang 1");
+        strcpy(ch, "nho hon bang");
         break;
     case 19:
-        strcpy(ch, "cong");
+        strcpy(ch, "nho hon");
         break;
     case 21:
-        strcpy(ch, "tru bang");
+        strcpy(ch, "dich phai");
         break;
     case 22:
-        strcpy(ch, "giam 1");
+        strcpy(ch, "lon hon bang");
         break;
     case 23:
-        strcpy(ch, "tru");
+        strcpy(ch, "lon hon");
         break;
     case 25:
-        strcpy(ch, "nhan bang");
+        strcpy(ch, "so sanh bang");
         break;
     case 26:
-        strcpy(ch, "nhan");
-        break;
-    case 28:
-        strcpy(ch, "chia bang");
+        strcpy(ch, "gan");
         break;
     case 29:
+        strcpy(ch, "ten ham, ten bien");
+        break;
+    case 32:
+        strcpy(ch, "chu thich //");
+        break;
+
+    case 35:
+        strcpy(ch, "chu thich /**/");
+        break;
+
+    case 36:
+        strcpy(ch, "chia bang");
+        break;
+
+    case 37:
         strcpy(ch, "chia");
         break;
-    case 30:
-        strcpy(ch, "chia lay du");
+
+    case 40:
+        strcpy(ch, "tang 1");
+        break;
+
+    case 41:
+        strcpy(ch, "cong bang");
+        break;
+
+    case 42:
+        strcpy(ch, "cong");
+        break;
+
+    case 44:
+        strcpy(ch, "giam 1");
+        break;
+
+    case 45:
+        strcpy(ch, "tru bang");
+        break;
+
+    case 46:
+        strcpy(ch, "tru");
         break;
 
     case 48:
+        strcpy(ch, "nhan bang");
+        break;
+
+    case 49:
+        strcpy(ch, "nhan");
+        break;
+
+    case 50:
+        strcpy(ch, "chia lay du");
+        break;
+
+    case 48 + 6:
         strcpy(ch, "so nguyen he 8");
         break;
-    case 51:
+    case 51 + 6:
         strcpy(ch, "so nguyen he 16");
         break;
-    case 52:
+    case 52 + 6:
         strcpy(ch, "so 0");
         break;
-    case 54:
+    case 54 + 6:
         strcpy(ch, "so nguyen he 10");
         break;
 
-    case 57:
+    case 57 + 6:
         strcpy(ch, "so thuc");
         break;
 
@@ -142,13 +190,22 @@ int nostar_end_state(state s)
     case 7:
     case 10:
     case 13:
+    case 15:
     case 17:
     case 18:
     case 21:
     case 22:
     case 25:
-    case 28:
-    case 30:
+    case 32:
+    case 35:
+    case 36:
+    case 40:
+    case 41:
+    case 44:
+    case 45:
+    case 48:
+    case 50:
+
         //
 
         // case 48:
@@ -175,13 +232,17 @@ int star_end_state(state s)
     case 23:
     case 26:
     case 29:
+    case 37:
+    case 42:
+    case 46:
+    case 49:
     //
     //
-    case 48:
-    case 51:
-    case 52:
-    case 54:
-    case 57:
+    case (48 + 6):
+    case (51 + 6):
+    case (52 + 6):
+    case (54 + 6):
+    case (57 + 6):
 
         return 1;
     default:
@@ -195,21 +256,29 @@ state start_state_otherbrand(state s) // trả về trạng thái bắt đầu (
     switch (s)
     {
     case 0:
-        start = 15; // 0 chuyển qua 15
+        start = 27; // 0 chuyển qua 27
         break;
-    case 15:
-        start = 45; // 15 ->45
+    case 27:
+        start = 30;
         break;
 
-    case 45:
-        start = ERROR_STATE; // 45 ko có đường chuyển nên lỗi
+    case 30:
+        start = 38;
+        break;
+
+    case 38:
+        start = 51;
+        break;
+
+    case 51:
+        start = ERROR_STATE; // 50 ko có đường chuyển nên lỗi
         break;
     }
     return start;
 }
 int start_state(state s) // kiểm tra coi phải trạng thái bắt đầu không , tức TH 0 vs 15
 {
-    if ((s == 0) || (s == 15) || (s == 45))
+    if ((s == 0) || (s == 27) || (s == 30) || (s == 38) || (s == 51))
         return 1;
     return 0;
 }
@@ -264,31 +333,39 @@ token search_token(unsigned int *i, attri tt)
         switch (s)
         {
         case 0:
-            if (c == '>')
+            if (c == '&')
                 s = 1;
-            else if (c == '<')
+            else if (c == '|')
                 s = 5;
             else if (c == '!')
                 s = 9;
-            else if (c == '=')
+            else if (c == '^')
                 s = 12;
+            else if (c == '~')
+                s = 15;
+            else if (c == '<')
+                s = 16;
+            else if (c == '>')
+                s = 20;
+            else if (c == '=')
+                s = 24;
             else
                 s = start_state_otherbrand(s); // kiểm tra coi s là trạng thái bắt đầu nào , 0 hay 15 ( vì rơi vào TH khác thì sẽ rơi vô Trạng thái bắt đầu)
             // cái ni chắc chắn trả về 15 để nhảy qua trạng thái bắt đầu khác
             // vì đã vô case 0 rồi thì nếu không rơi vào các TH trên thì chỉ có lỗi hoặc là trạng thái bắt đầu 15
             break;
         case 1:
-            if (c == '=')
+            if (c == '&')
                 s = 2;
-            else if (c == '>')
+            else if (c == '=')
                 s = 3;
             else
                 s = 4;
             break;
         case 5:
-            if (c == '=')
+            if (c == '|')
                 s = 6;
-            else if (c == '<')
+            else if (c == '=')
                 s = 7;
             else
                 s = 8;
@@ -305,34 +382,19 @@ token search_token(unsigned int *i, attri tt)
             else
                 s = 14;
             break;
-        case 15:
-            if (c == '+')
-                s = 16;
-            else if (c == '-')
-                s = 20;
-            else if (c == '*')
-                s = 24;
-            else if (c == '/')
-                s = 27;
-            else if (c == '%')
-                s = 30;
-            else
-                s = start_state_otherbrand(s);
-            // vì đây đã qua trạng thái bắt đầu 15 rồi nên nếu vô trương hợp khác thì chỉ có lỗi
-            // còn như ở case 0 nếu vô TH khác thì có thể lỗi hoặc qua trạng thái bắt đầu 15
-            break;
+
         case 16:
-            if (c == '=')
+            if (c == '<')
                 s = 17;
-            else if (c == '+')
+            else if (c == '=')
                 s = 18;
             else
                 s = 19;
             break;
         case 20:
-            if (c == '=')
+            if (c == '>')
                 s = 21;
-            else if (c == '-')
+            else if (c == '=')
                 s = 22;
             else
                 s = 23;
@@ -344,111 +406,186 @@ token search_token(unsigned int *i, attri tt)
                 s = 26;
             break;
         case 27:
-            if (c == '=')
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+                s = 28;
+            else
+                s = start_state_otherbrand(s); // 27 -> 30
+            break;
+        case 28:
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
                 s = 28;
             else
                 s = 29;
             break;
 
-        case 45:
+        case 30:
+            if (c == '/')
+                s = 31;
+            else
+                s = start_state_otherbrand(s); // 30 -> 38
+            break;
+
+        case 31:
+            if (c == '/')
+                s = 32;
+            else if (c == '*')
+                s = 33;
+            else if (c == '=')
+                s = 36;
+            else
+                s = 37;
+            break;
+
+        case 33:
+            if (c == '*')
+                s = 34;
+            else
+                s = 33;
+            break;
+        case 34:
+            if (c == '*')
+                s = 34;
+            else if (c == '/')
+                s = 35;
+            else
+                s = 33;
+            break;
+        case 38:
+            if (c == '+')
+                s = 39;
+            else if (c == '-')
+                s = 43;
+            else if (c == '*')
+                s = 47;
+            else if (c == '%')
+                s = 50;
+            else
+                s = start_state_otherbrand(s);
+            break;
+
+        case 39:
+            if (c == '+')
+                s = 40;
+            else if (c == '=')
+                s = 41;
+            else
+                s = 42;
+            break;
+        case 43:
+            if (c == '-')
+                s = 44;
+            else if (c == '=')
+                s = 45;
+            else
+                s = 46;
+            break;
+
+        case 47:
+            if (c == '=')
+                s = 48;
+            else
+                s = 49;
+            break;
+
+        case 45 + 6:
             if (c == '0')
             {
-                s = 46;
+                s = 46 + 6;
             }
             else if (c >= '1' && c <= '9')
             {
-                s = 53;
+                s = 53 + 6;
             }
             else if ('.')
             {
-                s = 55;
+                s = 55 + 6;
             }
             else
                 s = start_state_otherbrand(s);
             break;
-        case 46: // 1
+        case 46 + 6: // 1
             if (c >= '0' && c <= '7')
             {
-                s = 47; // so 2
+                s = 47 + 6; // so 2
             }
             else if (c == 'X' || c == 'x')
             {
-                s = 49; // 4
+                s = 49 + 6; // 4
             }
             else if (c == '.')
             {
-                s = 55;
+                s = 55 + 6;
             }
             else
             {
-                s = 52; // 7
+                s = 52 + 6; // 7
             }
             break;
-        case 47: // 2
+        case 47 + 6: // 2
             if (c >= '0' && c <= '7')
             {
-                s = 47; // 2
+                s = 47 + 6; // 2
             }
             // else if((c>='a'&&c<='z') || (c>='A'&&c<='Z')) {
             //     s = 55;//12
             // }
             else if (c == '.')
             {
-                s = 55; // 10
+                s = 55 + 6; // 10
             }
             else if (c >= '1' && c <= '9')
             { // kiem tra lai
-                s = 53;
+                s = 53 + 6;
             }
             else
             {
-                s = 48; // 3
+                s = 48 + 6; // 3
             }
             break;
-        case 49: // 4
+        case 49 + 6: // 4
             if ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'))
             {
-                s = 50; // 5
+                s = 50 + 6; // 5
             }
             break;
-        case 50: // 5
+        case 50 + 6: // 5
             if ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'))
             {
-                s = 50; // 5
+                s = 50 + 6; // 5
             }
             else
             {
-                s = 51; // 6
+                s = 51 + 6; // 6
             }
             break;
-        case 53:
+        case 53 + 6:
             if (c >= '0' && c <= '9')
             {
-                s = 53; // 10
+                s = 53 + 6; // 10
             }
             else if (c == '.')
             {
-                s = 55;
+                s = 55 + 6;
             }
             else
             {
-                s = 54; // 11
+                s = 54 + 6; // 11
             }
             break;
-        case 55: // 12
+        case 55 + 6: // 12
             if (c >= '0' && c <= '9')
             {
-                s = 56; // 12
+                s = 56 + 6; // 12
             }
             break;
-        case 56:
+        case 56 + 6:
             if (c >= '0' && c <= '9')
             {
-                s = 56; // 12
+                s = 56 + 6; // 12
             }
             else
             {
-                s = 57;
+                s = 57 + 6;
             }
             break;
         default:
@@ -532,7 +669,7 @@ int main()
     x = temp;
 
     // Opening file in reading mode
-    ptr = fopen("text.txt", "r");
+    ptr = fopen("full.txt", "r");
 
     if (NULL == ptr)
     {
