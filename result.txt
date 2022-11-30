@@ -17,9 +17,9 @@ token : >= , attribute : lon hon bang
 token : > , attribute : lon hon 
 token : = , attribute : gan 
 token : == , attribute : so sanh bang 
-token : int , attribute : ten ham, ten bien 
-token : bool , attribute : ten ham, ten bien 
-token : float , attribute : ten ham, ten bien 
+token : int , attribute : ten ham, ten bien, tu khoa 
+token : bool , attribute : ten ham, ten bien, tu khoa 
+token : float , attribute : ten ham, ten bien, tu khoa 
 token : // , attribute : chu thich // 
 token : /* test */ , attribute : chu thich /**/ 
 token : /= , attribute : chia bang 
@@ -40,3 +40,25 @@ token : 10 , attribute : so nguyen he 10
 token : 05 , attribute : so nguyen he 8 
 token : 0x6 , attribute : so nguyen he 16 
 token : 5.6 , attribute : so thuc 
+token : int , attribute : ten ham, ten bien, tu khoa 
+token : x , attribute : ten ham, ten bien, tu khoa 
+token : = , attribute : gan 
+token : 0 , attribute : so 0 
+token : x , attribute : ten ham, ten bien, tu khoa 
+token : = , attribute : gan 
+token : 5 , attribute : so nguyen he 10 
+token : + , attribute : cong 
+token : 0x6 , attribute : so nguyen he 16 
+token : - , attribute : tru 
+token : 04 , attribute : so nguyen he 8 
+token : x , attribute : ten ham, ten bien, tu khoa 
+token : ++ , attribute : tang 1 
+token : -= , attribute : tru bang 
+token : x , attribute : ten ham, ten bien, tu khoa 
+token : % , attribute : chia lay du 
+token : 10 , attribute : so nguyen he 10 
+token : 0.5 , attribute : so thuc 
+token : 0 , attribute : so 0 
+token : 8.5 , attribute : so thuc 
+token : 0 , attribute : so 0 
+token : 9 , attribute : so nguyen he 10 

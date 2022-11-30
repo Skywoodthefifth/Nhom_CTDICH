@@ -101,7 +101,7 @@ attri attribute(state s)
         strcpy(ch, "gan");
         break;
     case 29:
-        strcpy(ch, "ten ham, ten bien");
+        strcpy(ch, "ten ham, ten bien, tu khoa");
         break;
     case 32:
         strcpy(ch, "chu thich //");
